@@ -1,0 +1,709 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<title>MK Battery Pro</title><style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #07111f;
+    color: #ffffff;
+    transition: background .3s, color .3s;
+}
+
+body.light {
+    background: #f0f5fa;
+    color: #142238;
+}
+
+header {
+    padding: 20px;
+    background: #0b192b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 1px solid #25415d;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #00ffc3;
+}
+
+header p {
+    color: #aabbd0;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+button, a {
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #d9e7f7;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+nav a:hover {
+    color: #00ffc3;
+}
+
+.hero {
+    text-align: center;
+    padding: 35px 15px 20px;
+}
+
+.hero h1 {
+    font-size: clamp(28px, 6vw, 43px);
+    margin-bottom: 12px;
+}
+
+.hero span {
+    color: #00ffc3;
+}
+
+.hero p {
+    color: #aabbd0;
+    line-height: 1.8;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+}
+
+.card {
+    background: #0d1d32;
+    border: 1px solid #25415d;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+body.light .card {
+    background: #ffffff;
+    border-color: #d1deea;
+}
+
+.card h2 {
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    align-items: center;
+}
+
+.gauge {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: conic-gradient(#00ffc3 0deg, #243b53 0deg);
+    display: grid;
+    place-items: center;
+    margin: auto;
+}
+
+.gauge-inner {
+    width: 155px;
+    height: 155px;
+    border-radius: 50%;
+    background: #0d1d32;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body.light .gauge-inner {
+    background: #ffffff;
+}
+
+.battery-icon {
+    font-size: 35px;
+    margin-bottom: 7px;
+}
+
+#percentage {
+    font-size: 35px;
+    font-weight: bold;
+}
+
+#status {
+    color: #00ffc3;
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.description {
+    color: #aabbd0;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 0;
+    border-top: 1px solid #25415d;
+    font-size: 14px;
+}
+
+.stat strong {
+    color: #00ffc3;
+    text-align: right;
+}
+
+.review {
+    background: #063b35;
+    border: 1px solid #00b997;
+    border-radius: 12px;
+    padding: 17px;
+    margin-top: 23px;
+    line-height: 1.7;
+}
+
+.review h3 {
+    color: #00ffc3;
+    margin-bottom: 7px;
+}
+
+button {
+    background: #00e6ac;
+    color: #06151a;
+    border: none;
+    border-radius: 9px;
+    padding: 13px 17px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-right: 5px;
+}
+
+button:hover {
+    background: #65ffda;
+}
+
+.secondary {
+    background: #28435e;
+    color: white;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.feature {
+    padding: 17px;
+    border-radius: 12px;
+    background: #142941;
+    border: 1px solid #25415d;
+}
+
+body.light .feature {
+    background: #eef5fb;
+    color: #142238;
+}
+
+.feature h3 {
+    color: #00ffc3;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #b8c9dc;
+}
+
+body.light .feature p,
+body.light .description {
+    color: #52657b;
+}
+
+.history-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #25415d;
+    font-size: 14px;
+}
+
+.notice {
+    color: #ffcf70;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+footer {
+    padding: 25px;
+    text-align: center;
+    border-top: 1px solid #25415d;
+    color: #aabbd0;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+@media(max-width:600px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .gauge {
+        width: 175px;
+        height: 175px;
+    }
+
+    .gauge-inner {
+        width: 143px;
+        height: 143px;
+    }
+
+    .card {
+        padding: 17px;
+    }
+}
+</style></head><body><header>
+    <div>
+        <div class="logo">🔋 MK Battery Pro</div>
+        <p>CHECK • MONITOR • SAVE POWER</p>
+    </div><nav>
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#history">History</a>
+    <a href="#background">Background Apps</a>
+</nav>
+
+</header><section class="hero" id="home">
+    <h1>Smart <span>Battery Monitor</span></h1>
+    <p>Monitor your battery and discover ways to save power.</p>
+    <p>Simple • Smart • Mobile Friendly</p>
+</section><main class="container"><section class="card">
+    <h2>⚡ Live Battery Dashboard</h2><div class="layout">
+    <div class="gauge" id="gauge">
+        <div class="gauge-inner">
+            <div class="battery-icon">🔋</div>
+            <div id="percentage">--%</div>
+        </div>
+    </div>
+
+    <div>
+        <div id="status">Checking...</div>
+        <p class="description" id="message">
+            Checking browser battery support.
+        </p>
+
+        <div class="stat">
+            <span>Battery Level</span>
+            <strong id="level">--</strong>
+        </div>
+
+        <div class="stat">
+            <span>Charging</span>
+            <strong id="charging">--</strong>
+        </div>
+
+        <div class="stat">
+            <span>Time to Full</span>
+            <strong id="timeFull">Unavailable</strong>
+        </div>
+
+        <div class="stat">
+            <span>Time Remaining</span>
+            <strong id="timeRemaining">Unavailable</strong>
+        </div>
+
+        <div class="stat">
+            <span>Monitoring</span>
+            <strong id="monitoring">Starting</strong>
+        </div>
+    </div>
+</div>
+
+<div class="review">
+    <h3>💚 Battery Review</h3>
+    <p id="review">Waiting for battery information.</p>
+</div>
+
+<button onclick="checkBattery()">🔄 Check Battery</button>
+<button class="secondary" onclick="toggleTheme()">🌙 Theme</button>
+<button class="secondary" onclick="clearHistory()">Clear History</button>
+
+<p class="notice" id="support">
+    Battery information depends on browser support.
+</p>
+
+</section><section class="card" id="features">
+    <h2>🚀 Features</h2><div class="features">
+    <div class="feature">
+        <h3>🔋 Battery Monitor</h3>
+        <p>Displays the current battery percentage when available.</p>
+    </div>
+
+    <div class="feature">
+        <h3>⚡ Charging Monitor</h3>
+        <p>Updates charging status when the browser provides it.</p>
+    </div>
+
+    <div class="feature">
+        <h3>🔔 Low Battery Warning</h3>
+        <p>Displays a warning when the battery falls below 20% during monitoring.</p>
+    </div>
+
+    <div class="feature">
+        <h3>📊 Battery History</h3>
+        <p>Saves recent readings in this browser when local storage is available.</p>
+    </div>
+
+    <div class="feature">
+        <h3>🌡️ Temperature</h3>
+        <p>Ordinary web browsers generally cannot read the phone's actual battery temperature.</p>
+    </div>
+
+    <div class="feature">
+        <h3>❤️ Battery Health</h3>
+        <p>Battery percentage does not indicate battery health or maximum capacity.</p>
+    </div>
+
+    <div class="feature">
+        <h3>🌙 Dark and Light Themes</h3>
+        <p>Switch the website's appearance using the Theme button.</p>
+    </div>
+
+    <div class="feature">
+        <h3>📱 Device Information</h3>
+        <p id="deviceInfo">Reading browser information...</p>
+    </div>
+</div>
+
+</section><section class="card" id="history">
+    <h2>📊 Battery History</h2>
+    <p class="description">
+        Recent readings saved by this website.
+    </p>
+    <div id="historyList">No readings recorded yet.</div>
+</section><section class="card" id="background">
+    <h2>📱 Background App Guide</h2><p class="description">
+    This website cannot inspect all installed Android apps or identify
+    which apps are running in the background.
+</p>
+
+<div class="feature">
+    <h3>How to check your Android phone</h3>
+    <p>
+        1. Open Settings on your phone.<br>
+        2. Select Battery or Battery Usage.<br>
+        3. Review battery consumption by app.<br>
+        4. Select an app to see available background activity details.<br>
+        5. Adjust background restrictions if necessary.
+    </p>
+</div>
+
+<p class="notice">
+    Menu names differ between Android devices. Use your phone's
+    built-in battery settings for accurate app usage information.
+</p>
+
+</section><section class="card">
+    <h2>💡 Power Saving Tips</h2><div class="feature">
+    <p>
+        • Reduce screen brightness.<br>
+        • Enable Battery Saver when necessary.<br>
+        • Review apps with high battery consumption.<br>
+        • Avoid excessive heat.<br>
+        • Turn off unused connections when appropriate.<br>
+        • Keep your phone software updated.
+    </p>
+</div>
+
+</section></main><footer>
+    <p>🔋 MK Battery Pro</p>
+    <p>Check • Know • Stay Powered</p>
+    <p>Battery data is shown only when supported by your browser.</p>
+</footer><script>
+let battery = null;
+let eventHandlersAttached = false;
+let historyEntries = [];
+let lastSavedReading = "";
+let lastWarningLevel = null;
+
+const $ = id => document.getElementById(id);
+
+function loadHistory() {
+    try {
+        const saved = localStorage.getItem("mkBatteryHistory");
+        historyEntries = saved ? JSON.parse(saved) : [];
+
+        if (!Array.isArray(historyEntries)) {
+            historyEntries = [];
+        }
+
+        historyEntries = historyEntries.slice(0, 20);
+    } catch (error) {
+        historyEntries = [];
+    }
+
+    renderHistory();
+}
+
+function saveHistory() {
+    try {
+        localStorage.setItem(
+            "mkBatteryHistory",
+            JSON.stringify(historyEntries)
+        );
+    } catch (error) {
+        $("support").textContent =
+            "Browser storage is unavailable. History may not persist.";
+    }
+}
+
+function renderHistory() {
+    const list = $("historyList");
+    list.replaceChildren();
+
+    if (!historyEntries.length) {
+        list.textContent = "No readings recorded yet.";
+        return;
+    }
+
+    historyEntries.forEach(entry => {
+        const row = document.createElement("div");
+        row.className = "history-item";
+
+        row.textContent =
+            entry.time + " — " +
+            entry.level + "% — " +
+            entry.status;
+
+        list.appendChild(row);
+    });
+}
+
+function addHistory(level, status) {
+    const now = new Date();
+    const key = level + "|" + status;
+
+    // Avoid recording identical readings repeatedly.
+    if (key === lastSavedReading) {
+        return;
+    }
+
+    lastSavedReading = key;
+
+    historyEntries.unshift({
+        time: now.toLocaleString(),
+        level: level,
+        status: status
+    });
+
+    historyEntries = historyEntries.slice(0, 20);
+
+    saveHistory();
+    renderHistory();
+}
+
+function clearHistory() {
+    historyEntries = [];
+    lastSavedReading = "";
+    saveHistory();
+    renderHistory();
+}
+
+function formatTime(seconds) {
+    if (!Number.isFinite(seconds) || seconds < 0) {
+        return "Unavailable";
+    }
+
+    const minutes = Math.round(seconds / 60);
+
+    if (minutes < 60) {
+        return minutes + " min";
+    }
+
+    return Math.floor(minutes / 60) + " hr " +
+        (minutes % 60) + " min";
+}
+
+function makeReview(level, charging) {
+    if (level <= 10) {
+        return "Critical battery level. Charge your phone soon.";
+    }
+
+    if (level < 20) {
+        return "Battery is low. Consider charging and enabling Battery Saver.";
+    }
+
+    if (level < 50) {
+        return "Battery level is moderate. Charge when convenient.";
+    }
+
+    if (level < 80) {
+        return charging
+            ? "Battery level is good and your phone is charging."
+            : "Battery level is good. Keep monitoring as needed.";
+    }
+
+    return charging
+        ? "Battery level is high and your phone is charging."
+        : "Battery level is high. No immediate charging is needed.";
+}
+
+function updateBattery() {
+    if (!battery) return;
+
+    const level = Math.round(battery.level * 100);
+    const charging = battery.charging;
+    const status = charging ? "Charging" : "Not charging";
+    const angle = level * 3.6;
+
+    $("percentage").textContent = level + "%";
+    $("level").textContent = level + "%";
+    $("charging").textContent = charging ? "Yes" : "No";
+    $("status").textContent = charging ? "⚡ Charging" : "🔋 On Battery";
+
+    $("message").textContent = charging
+        ? "Your device reports that it is charging."
+        : "Your device reports that it is not charging.";
+
+    $("timeFull").textContent = charging
+        ? formatTime(battery.chargingTime)
+        : "Not charging";
+
+    $("timeRemaining").textContent = charging
+        ? "Charging"
+        : formatTime(battery.dischargingTime);
+
+    $("review").textContent = makeReview(level, charging);
+
+    $("gauge").style.background =
+        "conic-gradient(#00ffc3 0deg, #00ffc3 " +
+        angle + "deg, #243b53 " + angle + "deg, #243b53 360deg)";
+
+    $("monitoring").textContent = "Active";
+
+    if (level < 20) {
+        $("support").textContent =
+            "⚠️ Low battery warning: consider charging your phone.";
+        lastWarningLevel = level;
+    } else {
+        $("support").textContent =
+            "Battery information is provided by your browser.";
+        lastWarningLevel = null;
+    }
+
+    addHistory(level, status);
+}
+
+async function checkBattery() {
+    if (!("getBattery" in navigator)) {
+        battery = null;
+
+        $("percentage").textContent = "--%";
+        $("level").textContent = "Unsupported";
+        $("charging").textContent = "Unsupported";
+        $("status").textContent = "Unavailable";
+        $("timeFull").textContent = "Unavailable";
+        $("timeRemaining").textContent = "Unavailable";
+        $("monitoring").textContent = "Not supported";
+
+        $("message").textContent =
+            "Your browser does not provide the Battery Status API.";
+
+        $("review").textContent =
+            "Actual battery data cannot be read by this browser. Check your Android settings for the current level.";
+
+        $("support").textContent =
+            "This is a browser limitation, not a website error.";
+
+        return;
+    }
+
+    try {
+        battery = await navigator.getBattery();
+
+        if (!eventHandlersAttached) {
+            battery.addEventListener("levelchange", updateBattery);
+            battery.addEventListener("chargingchange", updateBattery);
+            battery.addEventListener("chargingtimechange", updateBattery);
+            battery.addEventListener("dischargingtimechange", updateBattery);
+
+            eventHandlersAttached = true;
+        }
+
+        updateBattery();
+    } catch (error) {
+        $("status").textContent = "Unavailable";
+        $("message").textContent =
+            "The browser could not provide battery information.";
+        $("support").textContent =
+            "Try a supported browser or check Android battery settings.";
+    }
+}
+
+function toggleTheme() {
+    document.body.classList.toggle("light");
+
+    try {
+        localStorage.setItem(
+            "mkBatteryTheme",
+            document.body.classList.contains("light") ? "light" : "dark"
+        );
+    } catch (error) {
+        // Theme still works for this page session.
+    }
+}
+
+function loadTheme() {
+    try {
+        if (localStorage.getItem("mkBatteryTheme") === "light") {
+            document.body.classList.add("light");
+        }
+    } catch (error) {
+        // Default to dark theme.
+    }
+}
+
+function showDeviceInfo() {
+    $("deviceInfo").textContent =
+        "Platform: " + (navigator.userAgentData?.platform ||
+        navigator.platform || "Unavailable") +
+        ". Browser details are approximate; the website cannot identify all hardware.";
+}
+
+loadHistory();
+loadTheme();
+showDeviceInfo();
+checkBattery();
+</script></body>
+</html>
